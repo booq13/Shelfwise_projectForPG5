@@ -1,23 +1,23 @@
+using Shelfwise.Catalog.Application.Abstractions;
+using Shelfwise.Catalog.Application.Services;
+using Shelfwise.Catalog.Presentation.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+// Composition Root: wiring ports to implementations
+builder.Services.AddSingleton<IBatchRepository, InMemoryBatchRepository>(); // Singleton: data survives between requests
+builder.Services.AddSingleton<IClock, SystemClock>();
+builder.Services.AddScoped<IBatchService, BatchService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
