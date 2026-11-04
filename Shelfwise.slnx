@@ -1,0 +1,38 @@
+<Solution>
+  <Folder Name="/Services/" />
+  <Folder Name="/Services/Catalog/">
+    <Project Path="src/Services/Catalog/Shelfwise.Catalog.Application/Shelfwise.Catalog.Application.csproj" />
+    <Project Path="src/Services/Catalog/Shelfwise.Catalog.Domain/Shelfwise.Catalog.Domain.csproj" />
+    <Project Path="src/Services/Catalog/Shelfwise.Catalog.Presentation/Shelfwise.Catalog.Presentation.csproj" />
+  </Folder>
+  <Folder Name="/Services/Customers/">
+    <Project Path="src/Services/Customers/Shelfwise.Customers.Application/Shelfwise.Customers.Application.csproj" />
+    <Project Path="src/Services/Customers/Shelfwise.Customers.Domain/Shelfwise.Customers.Domain.csproj" />
+    <Project Path="src/Services/Customers/Shelfwise.Customers.Presentation/Shelfwise.Customers.Presentation.csproj" />
+  </Folder>
+  <Folder Name="/Services/Invoicing/">
+    <Project Path="src/Services/Invoicing/Shelfwise.Invoicing.Application/Shelfwise.Invoicing.Application.csproj" />
+    <Project Path="src/Services/Invoicing/Shelfwise.Invoicing.Domain/Shelfwise.Invoicing.Domain.csproj" />
+    <Project Path="src/Services/Invoicing/Shelfwise.Invoicing.Presentation/Shelfwise.Invoicing.Presentation.csproj" />
+  </Folder>
+  <Folder Name="/Services/Ordering/">
+    <Project Path="src/Services/Ordering/Shelfwise.Ordering.Application/Shelfwise.Ordering.Application.csproj" />
+    <Project Path="src/Services/Ordering/Shelfwise.Ordering.Domain/Shelfwise.Ordering.Domain.csproj" />
+    <Project Path="src/Services/Ordering/Shelfwise.Ordering.Presentation/Shelfwise.Ordering.Presentation.csproj" />
+  </Folder>
+  <Folder Name="/Services/Payments/">
+    <Project Path="src/Services/Payments/Shelfwise.Payments.Application/Shelfwise.Payments.Application.csproj" />
+    <Project Path="src/Services/Payments/Shelfwise.Payments.Domain/Shelfwise.Payments.Domain.csproj" />
+    <Project Path="src/Services/Payments/Shelfwise.Payments.Presentation/Shelfwise.Payments.Presentation.csproj" />
+  </Folder>
+  <Folder Name="/Services/Pricing/">
+    <Project Path="src/Services/Pricing/Shelfwise.Pricing.Application/Shelfwise.Pricing.Application.csproj" />
+    <Project Path="src/Services/Pricing/Shelfwise.Pricing.Domain/Shelfwise.Pricing.Domain.csproj" />
+    <Project Path="src/Services/Pricing/Shelfwise.Pricing.Presentation/Shelfwise.Pricing.Presentation.csproj" />
+  </Folder>
+  <Folder Name="/Tests/" />
+  <Folder Name="/Tests/Catalog/">
+    <Project Path="tests/Catalog/Shelfwise.Catalog.Application.Tests/Shelfwise.Catalog.Application.Tests.csproj" />
+    <Project Path="tests/Catalog/Shelfwise.Catalog.Domain.Tests/Shelfwise.Catalog.Domain.Tests.csproj" />
+  </Folder>
+</Solution>

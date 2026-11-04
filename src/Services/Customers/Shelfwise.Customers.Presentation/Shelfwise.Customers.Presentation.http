@@ -1,0 +1,6 @@
+@Shelfwise.Customers.Presentation_HostAddress = http://localhost:5190
+
+GET {{Shelfwise.Customers.Presentation_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

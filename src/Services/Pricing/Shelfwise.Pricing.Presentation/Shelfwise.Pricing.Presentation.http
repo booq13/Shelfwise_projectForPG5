@@ -1,0 +1,6 @@
+@Shelfwise.Pricing.Presentation_HostAddress = http://localhost:5044
+
+GET {{Shelfwise.Pricing.Presentation_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
