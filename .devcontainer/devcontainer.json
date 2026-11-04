@@ -5,8 +5,7 @@
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "runServices": [
     "mssql",
-    "kafka",
-    "minio"
+    "kafka"
   ],
   "shutdownAction": "stopCompose",
   "features": {
