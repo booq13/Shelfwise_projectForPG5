@@ -4,11 +4,11 @@ using Shelfwise.Catalog.Presentation.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
-builder.Services.AddOpenApi();
+builder.Services.AddControllers(); // turn on controllers
+builder.Services.AddOpenApi(); // Api 
 
 // Composition Root: wiring ports to implementations
-builder.Services.AddSingleton<IBatchRepository, InMemoryBatchRepository>(); // Singleton: data survives between requests
+builder.Services.AddSingleton<IBatchRepository, InMemoryBatchRepository>(); //  data survives between requests
 builder.Services.AddSingleton<IClock, SystemClock>();
 builder.Services.AddScoped<IBatchService, BatchService>();
 

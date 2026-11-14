@@ -102,4 +102,4 @@ public sealed class BatchesController : ControllerBase
 
         _ => UnprocessableEntity(new { code = ex.Code, message = ex.Message })
     };
-}
+} 
