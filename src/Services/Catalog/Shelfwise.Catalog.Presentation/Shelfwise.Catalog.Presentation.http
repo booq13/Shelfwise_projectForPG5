@@ -1,6 +1,38 @@
-@Shelfwise.Catalog.Presentation_HostAddress = http://localhost:5012
+@HostAddress = http://localhost:5012
 
-GET {{Shelfwise.Catalog.Presentation_HostAddress}}/weatherforecast/
-Accept: application/json
+### 1. List of batches (two are seeded on startup)
+GET {{HostAddress}}/api/batches
 
-###
+### 2. One batch (paste a batchId from the list above)
+GET {{HostAddress}}/api/batches/PASTE-BATCH-ID
+
+### 3. Register a new batch -> 201 Created
+POST {{HostAddress}}/api/batches
+Content-Type: application/json
+
+{
+  "productId": "55555555-5555-5555-5555-555555555555",
+  "quantity": 10,
+  "expiryDate": "2027-01-31"
+}
+
+### 4. Reserve stock -> 200 OK (paste the batchId from step 3)
+POST {{HostAddress}}/api/batches/PASTE-BATCH-ID/reservations
+Content-Type: application/json
+
+{
+  "orderId": "66666666-6666-6666-6666-666666666666",
+  "quantity": 4
+}
+
+### 5. Reserve from the sold-out yogurt batch -> 422 (paste its batchId from step 1)
+POST {{HostAddress}}/api/batches/PASTE-YOGURT-BATCH-ID/reservations
+Content-Type: application/json
+
+{
+  "orderId": "44444444-4444-4444-4444-444444444444",
+  "quantity": 1
+}
+
+### 6. Delete a batch -> 204 No Content
+DELETE {{HostAddress}}/api/batches/PASTE-BATCH-ID
