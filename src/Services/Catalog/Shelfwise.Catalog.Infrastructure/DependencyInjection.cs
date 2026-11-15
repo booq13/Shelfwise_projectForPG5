@@ -2,6 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shelfwise.Catalog.Infrastructure.Persistence;
+using Shelfwise.Catalog.Application.Abstractions;
+using Shelfwise.Catalog.Infrastructure.Persistence.Repositories;
+using Shelfwise.Catalog.Infrastructure.Time;
 
 namespace Shelfwise.Catalog.Infrastructure;
 
@@ -31,6 +34,10 @@ public static class DependencyInjection
                 });
             }
         });
+
+        // Scoped: the same lifetime as CatalogDbContext (one per HTTP request)
+        services.AddScoped<IBatchRepository, SqlBatchRepository>();
+        services.AddSingleton<IClock, SystemClock>();
 
         return services;
     }

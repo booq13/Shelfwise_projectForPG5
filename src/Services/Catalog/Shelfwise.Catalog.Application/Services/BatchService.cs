@@ -48,6 +48,18 @@ public sealed class BatchService : IBatchService
         return batch is null ? null : MapToDto(batch);
     }
 
+    public async Task<IReadOnlyList<BatchDto>> GetBatchesAsync(CancellationToken cancellationToken = default)
+    {
+        var batches = await _batchRepository.GetAllAsync(cancellationToken);
+        return batches.Select(MapToDto).ToList();
+    }
+
+    public async Task DeleteBatchAsync(Guid batchId, CancellationToken cancellationToken = default)
+    {
+        var batch = await GetExistingBatchOrThrowAsync(batchId, cancellationToken);
+        await _batchRepository.DeleteAsync(batch, cancellationToken);
+    }
+
     private async Task<ProductBatch> GetExistingBatchOrThrowAsync(Guid batchId, CancellationToken cancellationToken)
     {
         var batch = await _batchRepository.GetByIdAsync(batchId, cancellationToken);

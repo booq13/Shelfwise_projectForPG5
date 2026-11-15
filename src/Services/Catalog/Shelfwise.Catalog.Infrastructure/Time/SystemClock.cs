@@ -1,8 +1,8 @@
 using Shelfwise.Catalog.Application.Abstractions;
 
-namespace Shelfwise.Catalog.Presentation.Infrastructure;
+namespace Shelfwise.Catalog.Infrastructure.Time;
 
-public sealed class SystemClock : IClock
+internal sealed class SystemClock : IClock
 {
     public DateOnly Today => DateOnly.FromDateTime(DateTime.UtcNow);
 }

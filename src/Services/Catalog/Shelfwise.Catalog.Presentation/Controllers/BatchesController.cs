@@ -53,6 +53,29 @@ public sealed class BatchesController : ControllerBase
         return Ok(batch);
     }
 
+     // Query: list of all batches -> 200
+    [HttpGet]
+    public async Task<ActionResult<IReadOnlyList<BatchDto>>> GetBatches(CancellationToken cancellationToken)
+    {
+        var batches = await _batchService.GetBatchesAsync(cancellationToken);
+        return Ok(batches);
+    }
+
+    // Command: delete a batch -> 204 / 404
+    [HttpDelete("{batchId:guid}")]
+    public async Task<IActionResult> DeleteBatch(Guid batchId, CancellationToken cancellationToken)
+    {
+        try
+        {
+            await _batchService.DeleteBatchAsync(batchId, cancellationToken);
+            return NoContent();
+        }
+        catch (DomainException ex)
+        {
+            return MapDomainException(ex);
+        }
+    }
+
     // Command: Reserve stock -> 200 / 400 / 404 / 422
     [HttpPost("{batchId:guid}/reservations")]
     public async Task<ActionResult<BatchDto>> ReserveStock(
