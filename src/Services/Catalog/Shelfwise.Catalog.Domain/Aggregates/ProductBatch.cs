@@ -7,14 +7,20 @@ public sealed class ProductBatch
 {
     private readonly List<StockReservation> _reservations = new();
 
-    public Guid Id { get; }
-    public Guid ProductId { get; }
-    public DateOnly ExpiryDate { get; }
-    public int DeliveredQuantity { get; }
+    public Guid Id { get; private set;}
+    public Guid ProductId { get; private set; }
+    public DateOnly ExpiryDate { get; private set; }
+    public int DeliveredQuantity { get; private set; }
 
     public IReadOnlyCollection<StockReservation> Reservations => _reservations.AsReadOnly();
     public int ReservedQuantity => _reservations.Sum(r => r.Quantity);
     public int AvailableQuantity => DeliveredQuantity - ReservedQuantity;
+
+    // Used only by EF Core to rebuild the aggregate from the database
+    private ProductBatch()
+    {
+        
+    }
 
     private ProductBatch(Guid id, Guid productId, int deliveredQuantity, DateOnly expiryDate)
     {

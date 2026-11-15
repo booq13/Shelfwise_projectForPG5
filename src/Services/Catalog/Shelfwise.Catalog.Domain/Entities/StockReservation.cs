@@ -4,8 +4,13 @@ namespace Shelfwise.Catalog.Domain.Entities;
 
 public sealed class StockReservation
 {
-    public Guid OrderId { get; }
+    public Guid OrderId { get; private set; }
     public int Quantity { get; private set; }
+
+    // Used only by EF Core
+    private StockReservation()
+    {
+    }
 
     internal StockReservation(Guid orderId, int quantity)
     {
