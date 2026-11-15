@@ -152,4 +152,60 @@ public class BatchServiceTests
         // Assert
         Assert.Null(result);
     }
+
+    // Query: list of batches
+
+    [Fact]
+    public async Task GetBatchesAsync_ReturnsAllBatchesAsDtos()
+    {
+        // Arrange
+        var first = ProductBatch.Register(Guid.NewGuid(), 10, Today.AddDays(5), Today);
+        var second = ProductBatch.Register(Guid.NewGuid(), 20, Today.AddDays(9), Today);
+        _repositoryMock
+            .Setup(r => r.GetAllAsync(It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new List<ProductBatch> { first, second });
+
+        // Act
+        var result = await _sut.GetBatchesAsync();
+
+        // Assert
+        Assert.Equal(2, result.Count);
+        Assert.Contains(result, b => b.BatchId == first.Id && b.AvailableQuantity == 10);
+        Assert.Contains(result, b => b.BatchId == second.Id && b.AvailableQuantity == 20);
+    }
+
+    // Command: delete batch
+
+    [Fact]
+    public async Task DeleteBatchAsync_WhenBatchExists_DeletesIt()
+    {
+        // Arrange
+        var batch = GivenExistingBatch();
+
+        // Act
+        await _sut.DeleteBatchAsync(batch.Id);
+
+        // Assert
+        _repositoryMock.Verify(r => r.DeleteAsync(batch, It.IsAny<CancellationToken>()), Times.Once);
+    }
+
+    [Fact]
+    public async Task DeleteBatchAsync_WhenBatchDoesNotExist_ThrowsBatchNotFoundAndNeverDeletes()
+    {
+        // Arrange
+        var missingBatchId = Guid.NewGuid();
+        _repositoryMock
+            .Setup(r => r.GetByIdAsync(missingBatchId, It.IsAny<CancellationToken>()))
+            .ReturnsAsync((ProductBatch?)null);
+
+        // Act
+        var ex = await Assert.ThrowsAsync<BatchNotFoundException>(
+            () => _sut.DeleteBatchAsync(missingBatchId));
+
+        // Assert
+        Assert.Equal(missingBatchId, ex.BatchId);
+        _repositoryMock.Verify(
+            r => r.DeleteAsync(It.IsAny<ProductBatch>(), It.IsAny<CancellationToken>()),
+            Times.Never);
+    }
 }

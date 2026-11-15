@@ -12,4 +12,10 @@ public interface IBatchService
 
     // Query: Available stock per batch
     Task<BatchDto?> GetBatchAsync(Guid batchId, CancellationToken cancellationToken = default);
+
+    // Query: list of all batches
+    Task<IReadOnlyList<BatchDto>> GetBatchesAsync(CancellationToken cancellationToken = default);
+
+    // Command: delete a batch (e.g. registered by mistake)
+    Task DeleteBatchAsync(Guid batchId, CancellationToken cancellationToken = default);
 }
