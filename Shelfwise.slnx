@@ -3,6 +3,7 @@
   <Folder Name="/Services/Catalog/">
     <Project Path="src/Services/Catalog/Shelfwise.Catalog.Application/Shelfwise.Catalog.Application.csproj" />
     <Project Path="src/Services/Catalog/Shelfwise.Catalog.Domain/Shelfwise.Catalog.Domain.csproj" />
+    <Project Path="src/Services/Catalog/Shelfwise.Catalog.Infrastructure/Shelfwise.Catalog.Infrastructure.csproj" />
     <Project Path="src/Services/Catalog/Shelfwise.Catalog.Presentation/Shelfwise.Catalog.Presentation.csproj" />
   </Folder>
   <Folder Name="/Services/Customers/">

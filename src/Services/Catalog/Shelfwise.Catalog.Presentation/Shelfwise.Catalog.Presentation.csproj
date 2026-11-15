@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Shelfwise.Catalog.Application\Shelfwise.Catalog.Application.csproj" />
     <ProjectReference Include="..\Shelfwise.Catalog.Domain\Shelfwise.Catalog.Domain.csproj" />
+    <ProjectReference Include="..\Shelfwise.Catalog.Infrastructure\Shelfwise.Catalog.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
