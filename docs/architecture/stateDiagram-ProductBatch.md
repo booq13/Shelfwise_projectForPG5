@@ -73,8 +73,6 @@ The rule "quantity must be greater than zero" is not listed: it is input validat
 
 ## 3. Given–When–Then scenarios
 
-"Today" is 2026-11-04 in all scenarios, as in the unit tests.
-
 ### Positive scenarios
 
 **S1. Reserve stock when there is enough** (test: `ReserveStock_WhenEnoughStock_ReducesAvailableQuantityAndAddsReservation`)
