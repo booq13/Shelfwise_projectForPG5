@@ -201,4 +201,38 @@ public class ProductBatchTests
         Assert.Single(batch.Reservations);
         Assert.Equal(40, batch.AvailableQuantity);
     }
+
+    [Fact]
+    public void ReserveStock_WhenNewOrder_CreatesReservationWithOwnIdAndReservationDate()
+    {
+        // Arrange
+        var batch = ProductBatch.Register(Guid.NewGuid(), 10, Today.AddDays(30), Today);
+
+        // Act
+        batch.ReserveStock(Guid.NewGuid(), 4, Today);
+
+        // Assert
+        var reservation = Assert.Single(batch.Reservations);
+        Assert.NotEqual(Guid.Empty, reservation.Id);
+        Assert.Equal(Today, reservation.ReservedOn);
+    }
+
+    [Fact]
+    public void ReserveStock_WhenSameOrderReservesAgain_KeepsTheSameReservationIdentity()
+    {
+        // Arrange
+        var batch = ProductBatch.Register(Guid.NewGuid(), 10, Today.AddDays(30), Today);
+        var orderId = Guid.NewGuid();
+        batch.ReserveStock(orderId, 4, Today);
+        var firstReservationId = batch.Reservations.Single().Id;
+
+        // Act
+        batch.ReserveStock(orderId, 4, Today.AddDays(1));
+
+        // Assert
+        var reservation = Assert.Single(batch.Reservations);
+        Assert.Equal(firstReservationId, reservation.Id);
+        Assert.Equal(8, reservation.Quantity);
+        Assert.Equal(Today, reservation.ReservedOn);
+    }
 }

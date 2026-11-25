@@ -37,13 +37,23 @@ internal sealed class ProductBatchConfiguration : IEntityTypeConfiguration<Produ
 
             reservation.WithOwner().HasForeignKey("BatchId");
 
-            reservation.HasKey("BatchId", nameof(StockReservation.OrderId));
+            // Own identity of the entity, created in C#
+            reservation.HasKey(r => r.Id);
+            reservation.Property(r => r.Id)
+                .ValueGeneratedNever();
 
             reservation.Property(r => r.OrderId)
-                .ValueGeneratedNever();
+                .IsRequired();
 
             reservation.Property(r => r.Quantity)
                 .IsRequired();
+
+            reservation.Property(r => r.ReservedOn)
+                .IsRequired();
+
+            // Business rule kept in the database: one reservation per order in a batch
+            reservation.HasIndex("BatchId", nameof(StockReservation.OrderId))
+                .IsUnique();
         });
 
         builder.Navigation(b => b.Reservations)

@@ -47,6 +47,9 @@ namespace Shelfwise.Catalog.Infrastructure.Persistence.Migrations
                 {
                     b.OwnsMany("Shelfwise.Catalog.Domain.Entities.StockReservation", "Reservations", b1 =>
                         {
+                            b1.Property<Guid>("Id")
+                                .HasColumnType("uniqueidentifier");
+
                             b1.Property<Guid>("BatchId")
                                 .HasColumnType("uniqueidentifier");
 
@@ -56,7 +59,13 @@ namespace Shelfwise.Catalog.Infrastructure.Persistence.Migrations
                             b1.Property<int>("Quantity")
                                 .HasColumnType("int");
 
-                            b1.HasKey("BatchId", "OrderId");
+                            b1.Property<DateOnly>("ReservedOn")
+                                .HasColumnType("date");
+
+                            b1.HasKey("Id");
+
+                            b1.HasIndex("BatchId", "OrderId")
+                                .IsUnique();
 
                             b1.ToTable("StockReservations", "catalog");
 

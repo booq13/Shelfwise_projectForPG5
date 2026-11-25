@@ -69,7 +69,7 @@ public sealed class ProductBatch
             return;
         }
 
-        _reservations.Add(new StockReservation(orderId, quantity));
+        _reservations.Add(new StockReservation(orderId, quantity, today));
     }
 
     // Command: Release reservation -> Event: Stock reservation released

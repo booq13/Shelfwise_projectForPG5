@@ -75,6 +75,6 @@ public sealed class BatchService : IBatchService
             batch.ReservedQuantity,
             batch.AvailableQuantity,
             batch.Reservations
-                .Select(r => new StockReservationDto(r.OrderId, r.Quantity))
+                .Select(r => new StockReservationDto(r.Id, r.OrderId, r.Quantity, r.ReservedOn))
                 .ToList());
 }

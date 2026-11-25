@@ -1,8 +1,6 @@
 namespace Shelfwise.Catalog.Application.DTOs;
 
-public sealed record StockReservationDto(
-    Guid OrderId,
-    int Quantity);
+public sealed record StockReservationDto(Guid ReservationId, Guid OrderId, int Quantity, DateOnly ReservedOn);
 
 public sealed record BatchDto(
     Guid BatchId,
