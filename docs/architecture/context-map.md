@@ -80,7 +80,7 @@ public interface IPaymentGatewayPort
 public sealed record PaymentConfirmation(string GatewayReference, DateTimeOffset ChargedAt);
 ```
  
-**ACL classes** (`internal sealed`, `Infrastructure/Acl`): `PaymentGatewayTranslator` (pure mapping), `PaymentGatewayAdapter` (HTTP call), `PaymentGatewayAcl` (implements the port).
+**ACL classes** (`internal sealed`, `Infrastructure/Acl`): `PaymentGatewayTranslator` (pure mapping), `PaymentGatewayAdapter` (HTTP call), `PaymentGatewayAcl` (implements the port). Gateway contracts: `GatewayChargeRequestDto`, `GatewayChargeResponseDto`.
  
 | Foreign element | Our type | Rule |
 |---|---|---|
